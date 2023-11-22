@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	<TargetFramework>net8.0-windows</TargetFramework>
+	  <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <ItemGroup>
+	<CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+	  <Link>Properties\CustomDictionary.xml</Link>
+	</CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+	<ProjectReference Include="..\Fonlow.CliGui.Core\Fonlow.CliGui.Core.csproj" />
+  </ItemGroup>
+  <PropertyGroup>
+	<PostBuildEvent>copy $(TargetPath) $(SolutionDir)Fonlow.CliGui\$(OutDir)</PostBuildEvent>
+	<AssemblyTitle>Components for Robocopy</AssemblyTitle>
+	<Description>This may be loaded through CommandLineGui.exe.config</Description>
+	<Copyright>Copyright © Zijian Huang 2009-2013</Copyright>
+  </PropertyGroup>
+</Project>
