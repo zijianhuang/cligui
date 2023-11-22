@@ -1,4 +1,4 @@
-Command Line GUI project includes a command line arguments parser library for constructing .NET Framework command line programs with complex arguments.
+Command Line GUI (CliGui) project includes a command line arguments parser library for constructing .NET console app with complex arguments. This is a migration from [Command Line GUI](https://github.com/zijianhuang/commandlinegui) (commandlinegui) which was developed for .NET Framework.
 
 You define a data model class decorated with some attributes for represeting arguments. The core library will parse the commaline arguments and populate the Plain Old CLR Object which is the router of the functionality of your command line program. And the Core library may also generates CLI help page.
 
@@ -18,17 +18,3 @@ You may use the core library to wrap existing command line programs like Robocop
 ## References
 
 * [Get the Best of Both Worlds: Command Line and GUI](https://www.codeproject.com/Articles/649950/Get-the-Best-of-Both-Worlds-Command-Line-and-GUI)
-
-
-
-
-**Remarks**
-
-* Command Line GUI was hosted at https://sourceforge.net/projects/commandlinegui/ since 2010, and is moved to https://github.com/zijianhuang/commandlinegui in 2018.
-
-
-## Maintainer Notices
-The project had started on .NET Framework 4, and the latest targets .NET Framework 4.8 as of 2023-07-29. And a .NET (Core) migration is on the way.
-
-
-
