@@ -1,6 +1,6 @@
 ﻿namespace Fonlow.CommandLineGui.Gui
 {
-    partial class FlagsUC<TEnumType>
+    partial class FlagsUC
     {
         /// <summary> 
         /// Required designer variable.
@@ -20,49 +20,44 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+		#region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            this.checkedListBox = new System.Windows.Forms.CheckedListBox();
-            this.SuspendLayout();
-            // 
-            // checkedListBox
-            // 
-            this.checkedListBox.CheckOnClick = true;
-            this.checkedListBox.ColumnWidth = 40;
-            this.checkedListBox.FormattingEnabled = true;
-            this.checkedListBox.Items.AddRange(new object[] {
-            "D",
-            "A",
-            "T",
-            "S",
-            "O",
-            "U"});
-            this.checkedListBox.Location = new System.Drawing.Point(3, 3);
-            this.checkedListBox.MultiColumn = true;
-            this.checkedListBox.Name = "checkedListBox";
-            this.checkedListBox.Size = new System.Drawing.Size(211, 19);
-            this.checkedListBox.TabIndex = 13;
-            // 
-            // FlagsUc
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Controls.Add(this.checkedListBox);
-            this.Name = "FlagsUc";
-            this.Size = new System.Drawing.Size(254, 25);
-            this.ResumeLayout(false);
+		/// <summary> 
+		/// Required method for Designer support - do not modify 
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			checkedListBox = new System.Windows.Forms.CheckedListBox();
+			SuspendLayout();
+			// 
+			// checkedListBox
+			// 
+			checkedListBox.CheckOnClick = true;
+			checkedListBox.ColumnWidth = 40;
+			checkedListBox.FormattingEnabled = true;
+			checkedListBox.Items.AddRange(new object[] { "D", "A", "T", "S", "O", "U" });
+			checkedListBox.Location = new System.Drawing.Point(4, 3);
+			checkedListBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			checkedListBox.MultiColumn = true;
+			checkedListBox.Name = "checkedListBox";
+			checkedListBox.Size = new System.Drawing.Size(246, 22);
+			checkedListBox.TabIndex = 13;
+			// 
+			// FlagsUC
+			// 
+			AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			Controls.Add(checkedListBox);
+			Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			Name = "FlagsUC";
+			Size = new System.Drawing.Size(296, 29);
+			ResumeLayout(false);
+		}
 
-        }
+		#endregion
 
-        #endregion
-
-        private System.Windows.Forms.CheckedListBox checkedListBox;
+		protected System.Windows.Forms.CheckedListBox checkedListBox;
     }
 }

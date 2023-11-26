@@ -6,7 +6,7 @@ using System;
 
 namespace Fonlow.CommandLineGui.Robocopy
 {
-	public class FlagsEditor<T, TEnumType> : UITypeEditor where T : FlagsUC<TEnumType>, new()
+	public class FlagsEditor<T, TEnumType> : UITypeEditor where T : EnumFlagsUc<TEnumType>, new()
 	{
 		public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
 		{
@@ -21,13 +21,13 @@ namespace Fonlow.CommandLineGui.Robocopy
 
 			// Uses the IWindowsFormsEditorService to display a 
 			// drop-down UI in the Properties window.
-			using (var flagsUc = (new FlagsUC<TEnumType>((TEnumType)value)) as T)
+			using (var EnumFlagsUc = (new EnumFlagsUc<TEnumType>((TEnumType)value)) as T)
 			{
 				IWindowsFormsEditorService edSvc = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
 				if (edSvc != null)
 				{
-					edSvc.DropDownControl(flagsUc);
-					int flags = flagsUc.Flags;
+					edSvc.DropDownControl(EnumFlagsUc);
+					int flags = EnumFlagsUc.Flags;
 					return flags;
 				}
 			}
@@ -42,11 +42,11 @@ namespace Fonlow.CommandLineGui.Robocopy
 
 	}
 
-	public class CopyFlagsEditor : FlagsEditor<FlagsUC<CopyFlags>, CopyFlags>
+	public class CopyFlagsEditor : FlagsEditor<EnumFlagsUc<CopyFlags>, CopyFlags>
 	{
 	}
 
-	public class RashFlagsEditor : FlagsEditor<FlagsUC<Rashcneto>, Rashcneto>
+	public class RashFlagsEditor : FlagsEditor<EnumFlagsUc<Rashcneto>, Rashcneto>
 	{
 	}
 }

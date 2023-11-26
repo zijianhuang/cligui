@@ -27,7 +27,7 @@ namespace Fonlow.CommandLineGui
 				var n = Assembly.GetExecutingAssembly().Location;
 				var d = Path.GetDirectoryName(n);
 				var assemblyPath = Path.Combine(d, assemblyName);
-				assembly = Assembly.LoadFile(assemblyPath);
+				assembly = Assembly.LoadFrom(assemblyPath);
 				AppTraceSource.Instance.TraceInformation("Assembly {0} is loaded for type {1}.", assemblyName, "ICommand");
 			}
 			catch (System.IO.FileLoadException e)
