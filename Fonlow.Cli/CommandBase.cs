@@ -28,23 +28,23 @@ namespace Fonlow.Cli
 			}
 			catch (System.IO.FileLoadException e)
 			{
-				AppTraceSource.Instance.TraceWarning(String.Format("When loading {0}, errors occur: {1}", assemblyName, e.Message));
+				AppTraceSource.Instance.TraceWarning(string.Format("When loading {0}, errors occur: {1}", assemblyName, e.Message));
 				return null;
 			}
 			catch (BadImageFormatException e)
 			{
-				AppTraceSource.Instance.TraceWarning(String.Format("When loading {0}, errors occur: {1}", assemblyName, e.Message));
+				AppTraceSource.Instance.TraceWarning(string.Format("When loading {0}, errors occur: {1}", assemblyName, e.Message));
 				//when file is a win32 dll.
 				return null;
 			}
 			catch (System.IO.FileNotFoundException e)
 			{
-				AppTraceSource.Instance.TraceWarning(String.Format("When loading {0}, errors occur: {1}", assemblyName, e.Message));
+				AppTraceSource.Instance.TraceWarning(string.Format("When loading {0}, errors occur: {1}", assemblyName, e.Message));
 				return null;
 			}
 			catch (ArgumentException e)
 			{
-				AppTraceSource.Instance.TraceWarning(String.Format("When loading {0}, errors occur: {1}", assemblyName, e.Message));
+				AppTraceSource.Instance.TraceWarning(string.Format("When loading {0}, errors occur: {1}", assemblyName, e.Message));
 				return null;
 			}
 
@@ -67,12 +67,12 @@ namespace Fonlow.Cli
 			{
 				foreach (Exception ex in e.LoaderExceptions)
 				{
-					AppTraceSource.Instance.TraceWarning(String.Format("When loading {0}, GetTypes errors occur: {1}", assemblyName, ex.Message));
+					AppTraceSource.Instance.TraceWarning(string.Format("When loading {0}, GetTypes errors occur: {1}", assemblyName, ex.Message));
 				}
 			}
 			catch (TargetInvocationException e)
 			{
-				AppTraceSource.Instance.TraceWarning(String.Format("When loading {0}, GetTypes errors occur: {1}", assemblyName, e.Message + "~~" + e.InnerException.Message));
+				AppTraceSource.Instance.TraceWarning(string.Format("When loading {0}, GetTypes errors occur: {1}", assemblyName, e.Message + "~~" + e.InnerException.Message));
 			}
 
 			return null;
@@ -111,7 +111,7 @@ namespace Fonlow.Cli
 
 			const string template = @"\s*{0}(?<OptionName>\w*[\+|\-]?)";
 			optionSeparator = commandLineManagerAttribute.OptionSeparator;
-			optionNamePattern = String.Format(template, optionSeparator);
+			optionNamePattern = string.Format(template, optionSeparator);
 
 			allGroupAttributesDic = PlossumAttributesHelper.GetCommandLineOptionGroupAttributesDic(proxyTypeOfParametersAndOptions);
 
@@ -235,7 +235,7 @@ namespace Fonlow.Cli
 		{
 			get
 			{
-				string s = String.IsNullOrEmpty(ExecutablePath) ? CommandName : ExecutablePath;
+				string s = string.IsNullOrEmpty(ExecutablePath) ? CommandName : ExecutablePath;
 				return s + " " + DefinedParametersAndOptions;
 			}
 		}
@@ -295,7 +295,7 @@ namespace Fonlow.Cli
 			var methodInfo = array.GetType().GetMethod("ToString");
 			var list = array as IEnumerable<object>;
 			var textList = list.Select(d => PropertyHelper.SimplyQuoteString(((string)methodInfo.Invoke(d, null)).Trim()));
-			return String.Join(" ", textList);
+			return string.Join(" ", textList);
 		}
 
 		/// <summary>
@@ -340,7 +340,7 @@ namespace Fonlow.Cli
 
 							var optionAttribute = PlossumAttributesHelper.GetCommandLineOptionAttribute(propertyInfo);
 							CommandLineOptionGroupAttribute optionGroupAttribute = null;
-							if (!String.IsNullOrWhiteSpace(optionAttribute.GroupId))
+							if (!string.IsNullOrWhiteSpace(optionAttribute.GroupId))
 							{
 								allGroupAttributesDic.TryGetValue(optionAttribute.GroupId, out optionGroupAttribute);
 							}

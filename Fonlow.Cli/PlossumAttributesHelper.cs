@@ -102,7 +102,7 @@ namespace Fonlow.Cli
                 var optionAttribute = objects[0] as CommandLineOptionAttribute;
                 if (optionAttribute != null)
                 {
-                    if (String.IsNullOrWhiteSpace(optionAttribute.Name))
+                    if (string.IsNullOrWhiteSpace(optionAttribute.Name))
                     {
                         optionAttribute.Name = memberInfo.Name;
                     }

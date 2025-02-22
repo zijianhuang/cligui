@@ -1,20 +1,43 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Authors>Zijian Huang</Authors>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Description>For .NET console app with many complex parameters.</Description>
+		<PackageReleaseNotes>.NET 9</PackageReleaseNotes>
+		<NeutralLanguage>en</NeutralLanguage>
+		<PackageProjectUrl>https://github.com/zijianhuang/cligui</PackageProjectUrl>
+		<Copyright>Copyright © Zijian Huang 2007-$([System.DateTime]::Now.Year)</Copyright>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<Version>1.1</Version>
+		<PackageTags>.NET,Console,</PackageTags>
+		<RepositoryUrl>https://github.com/zijianhuang/webapiclientgen</RepositoryUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<AnalysisLevel>latest-all</AnalysisLevel>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <CodeAnalysisDictionary Include="..\CustomDictionary.xml" Link="CustomDictionary.xml" />
-  </ItemGroup>
+	<ItemGroup>
+		<CodeAnalysisDictionary Include="..\CustomDictionary.xml" Link="CustomDictionary.xml" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.2" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.2" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Fonlow.AntlrParser\Fonlow.AntlrParser.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Fonlow.AntlrParser\Fonlow.AntlrParser.csproj" />
+		<None Include="README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+		<CopyDebugSymbolFilesFromPackages>true</CopyDebugSymbolFilesFromPackages>
+		<CopyDocumentationFilesFromPackages>true</CopyDocumentationFilesFromPackages>
+	</PropertyGroup>
 
 </Project>

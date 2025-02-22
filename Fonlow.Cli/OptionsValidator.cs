@@ -77,33 +77,33 @@ namespace Fonlow.Cli
 
                         if (!(optionAttributes.Count() <= 1))
                         {
-                            builder.AppendLine(String.Format("Group {0} requires at most one option defined, but actually these are {1} options defined", groupAttribute.Name, optionAttributes.Count()));
+                            builder.AppendLine(string.Format("Group {0} requires at most one option defined, but actually these are {1} options defined", groupAttribute.Name, optionAttributes.Count()));
                         }
                         break;
                     case OptionGroupRequirement.AtLeastOne:
                         if ((optionAttributes == null)
                             || !(optionAttributes.Count() >= 1))
                         {
-                            builder.AppendLine(String.Format("Group {0} requires at least one option defined, but actually these is none defined", groupAttribute.Name));
+                            builder.AppendLine(string.Format("Group {0} requires at least one option defined, but actually these is none defined", groupAttribute.Name));
                         }
 
                         break;
                     case OptionGroupRequirement.ExactlyOne:
                         if (optionAttributes == null)
                         {
-                            builder.AppendLine(String.Format("Group {0} requires exactly one option defined, but actually these is none defined", groupAttribute.Name));
+                            builder.AppendLine(string.Format("Group {0} requires exactly one option defined, but actually these is none defined", groupAttribute.Name));
 
                         }
                         else if (!(optionAttributes.Count() == 1))
                         {
-                            builder.AppendLine(String.Format("Group {0} requires exactly one option defined, but actually these are {1} options defined.", groupAttribute.Name, optionAttributes.Count()));
+                            builder.AppendLine(string.Format("Group {0} requires exactly one option defined, but actually these are {1} options defined.", groupAttribute.Name, optionAttributes.Count()));
                         }
 
                         break;
                     case OptionGroupRequirement.All:
                         if (optionAttributes == null)
                         {
-                            builder.AppendLine(String.Format("Group {0} requires all options defined, but actually these is none defined", groupAttribute.Name));
+                            builder.AppendLine(string.Format("Group {0} requires all options defined, but actually these is none defined", groupAttribute.Name));
                         }
                         else
                         {
@@ -111,7 +111,7 @@ namespace Fonlow.Cli
                             var delta = numberOfOptionsOfGroup - optionAttributes.Count();
                             if (delta != 0)
                             {
-                                builder.AppendLine(String.Format("Group {0} requires all options defined, but actually there are {1} options(s) missing.", groupAttribute.Name, delta));
+                                builder.AppendLine(string.Format("Group {0} requires all options defined, but actually there are {1} options(s) missing.", groupAttribute.Name, delta));
                             }
                         }
                         break;
@@ -128,7 +128,7 @@ namespace Fonlow.Cli
             for (int i = 0; i < propertyInfoOfAssignedProperties.Count; i++)
             {
                 var optionAttribute = optionAttributesOfAssignedProperties[i];
-                if (String.IsNullOrEmpty(optionAttribute.Prohibits))
+                if (string.IsNullOrEmpty(optionAttribute.Prohibits))
                     continue;
 
                 var propertyInfo = propertyInfoOfAssignedProperties[i];
@@ -163,7 +163,7 @@ namespace Fonlow.Cli
 
                     if (matched)
                     {
-                        builder.AppendLine(String.Format("Option {0} defined is prohibited since option {1} is already defined.", nextPropertyInfo.Name, propertyInfo.Name));
+                        builder.AppendLine(string.Format("Option {0} defined is prohibited since option {1} is already defined.", nextPropertyInfo.Name, propertyInfo.Name));
                     }
                 }
 
@@ -185,17 +185,17 @@ namespace Fonlow.Cli
                     var arrayLength = list.Length;
                     if ((optionAttribute.MaxOccurs > 1) && (arrayLength > optionAttribute.MaxOccurs))
                     {
-                        builder.AppendLine(String.Format("Option {0} with MaxOccurs={1} has {2} presented.", propertyInfo.Name, optionAttribute.MaxOccurs, arrayLength));
+                        builder.AppendLine(string.Format("Option {0} with MaxOccurs={1} has {2} presented.", propertyInfo.Name, optionAttribute.MaxOccurs, arrayLength));
                     }
 
                     if ((optionAttribute.MinOccurs > 0) && (arrayLength < optionAttribute.MinOccurs))
                     {
-                        builder.AppendLine(String.Format("Option {0} with MinOccurs={1} has {2} presented.", propertyInfo.Name, optionAttribute.MinOccurs, arrayLength));
+                        builder.AppendLine(string.Format("Option {0} with MinOccurs={1} has {2} presented.", propertyInfo.Name, optionAttribute.MinOccurs, arrayLength));
                     }
 
                     if ((optionAttribute.MaxOccurs > 0) && (optionAttribute.MinOccurs > optionAttribute.MaxOccurs))
                     {
-                        builder.AppendLine(String.Format("In option {0} MinOccurs={1} is greater than MaxOccurs={2} .", propertyInfo.Name, optionAttribute.MinOccurs, optionAttribute.MaxOccurs));
+                        builder.AppendLine(string.Format("In option {0} MinOccurs={1} is greater than MaxOccurs={2} .", propertyInfo.Name, optionAttribute.MinOccurs, optionAttribute.MaxOccurs));
                     }
                 }
             }
@@ -212,14 +212,14 @@ namespace Fonlow.Cli
                     //                var arrayLength = list.Length;
                     if ((list == null) && (optionAttribute.MinOccurs > 0))
                     {
-                        builder.AppendLine(String.Format("Option {0} with MinOccurs={1} has no value.", propertyInfo.Name, optionAttribute.MinOccurs));
+                        builder.AppendLine(string.Format("Option {0} with MinOccurs={1} has no value.", propertyInfo.Name, optionAttribute.MinOccurs));
                     }
                 }
                 else
                 {
                     if (optionAttribute.MaxOccurs > 1)
                     {
-                        builder.AppendLine(String.Format("Option {0} must not have MaxOccurs greater than 1.", propertyInfo.Name));
+                        builder.AppendLine(string.Format("Option {0} must not have MaxOccurs greater than 1.", propertyInfo.Name));
                     }
                 }
             }
@@ -247,7 +247,7 @@ namespace Fonlow.Cli
                     var memberType = firstMember.GetType();
                     if (!IsNumericType(memberType))
                     {
-                        builder.AppendLine(String.Format("Options {0} is not of numeric type, and must not have either MaxValue or MinValue defined in CommandLineOptionAttribute.", propertyInfo.Name));
+                        builder.AppendLine(string.Format("Options {0} is not of numeric type, and must not have either MaxValue or MinValue defined in CommandLineOptionAttribute.", propertyInfo.Name));
                         continue;
                     }
 
@@ -264,7 +264,7 @@ namespace Fonlow.Cli
                             
                             if (comparable.CompareTo(maxValue) > 0)
                             {
-                                builder.AppendLine(String.Format("In option {0}, this member {1} is greater than maxValue {2}.", propertyInfo.Name, m, maxValue));
+                                builder.AppendLine(string.Format("In option {0}, this member {1} is greater than maxValue {2}.", propertyInfo.Name, m, maxValue));
                             }
                         }
                     }
@@ -281,7 +281,7 @@ namespace Fonlow.Cli
                             IComparable comparable = m as IComparable;
                             if (comparable.CompareTo(minValue) < 0)
                             {
-                                builder.AppendLine(String.Format("In option {0}, this member {1} is less than than minValue {2}.", propertyInfo.Name, m, minValue));
+                                builder.AppendLine(string.Format("In option {0}, this member {1} is less than than minValue {2}.", propertyInfo.Name, m, minValue));
                             }
                         }
                     }
@@ -290,7 +290,7 @@ namespace Fonlow.Cli
                 {
                     if (!IsNumericType(propertyInfo.PropertyType))
                     {
-                        builder.AppendLine(String.Format("Options {0} is not of numeric type, and must not have either MaxValue or MinValue defined in CommandLineOptionAttribute.", propertyInfo.Name));
+                        builder.AppendLine(string.Format("Options {0} is not of numeric type, and must not have either MaxValue or MinValue defined in CommandLineOptionAttribute.", propertyInfo.Name));
                         continue;
                     }
                     if (maxValue != null)
@@ -304,7 +304,7 @@ namespace Fonlow.Cli
 
                         if (comparable.CompareTo(maxValue) > 0)
                         {
-                            builder.AppendLine(String.Format("In option {0}, this member {1} is greater than maxValue {2}.", propertyInfo.Name, m, maxValue));
+                            builder.AppendLine(string.Format("In option {0}, this member {1} is greater than maxValue {2}.", propertyInfo.Name, m, maxValue));
                         }
                     }
 
@@ -319,7 +319,7 @@ namespace Fonlow.Cli
 
                         if (comparable.CompareTo(minValue) < 0)
                         {
-                            builder.AppendLine(String.Format("In option {0}, this member {1} is less than than minValue {2}.", propertyInfo.Name, m, minValue));
+                            builder.AppendLine(string.Format("In option {0}, this member {1} is less than than minValue {2}.", propertyInfo.Name, m, minValue));
                         }
                     }
                 }

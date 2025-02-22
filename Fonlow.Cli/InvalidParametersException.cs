@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace Fonlow.Cli
 {
-    [Serializable]
+	[Serializable]
     public class InvalidParametersException : Exception
     {
         public InvalidParametersException():base()
@@ -15,10 +11,6 @@ namespace Fonlow.Cli
         }
 
         public InvalidParametersException(string message):base(message) { }
-
-
-        protected InvalidParametersException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-
 
         public InvalidParametersException(string message, Exception innerException)
             : base(message, innerException)

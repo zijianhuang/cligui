@@ -27,7 +27,7 @@ namespace Fonlow.Cli
                 throw new ArgumentNullException("options");
 
             var refined = args.Select(d => d.Contains(' ') ? ('"' + d + '"') : d);//in command line, program will strip off the double quotes so I need to reintroduce.
-            var s = String.Join(" ", refined);
+            var s = string.Join(" ", refined);
             Debug.WriteLine("refined: " + s);
             return ReadOptions(s, options);
         }
@@ -43,7 +43,7 @@ namespace Fonlow.Cli
             if (options == null)
                 throw new ArgumentNullException("options");
 
-            if (String.IsNullOrWhiteSpace(optionsText))
+            if (string.IsNullOrWhiteSpace(optionsText))
                 return null;
 
             var parserResult= ArgumentParserResult.Parse(optionsText);
@@ -112,7 +112,7 @@ namespace Fonlow.Cli
                 {
                     string[] optionValues = null;
                     string optionName;
-                    if (String.IsNullOrWhiteSpace(optionAttribute.Name))
+                    if (string.IsNullOrWhiteSpace(optionAttribute.Name))
                     {
                         optionName = propertyItem.Name;
                         optionAttribute.Name = optionName;
@@ -163,14 +163,14 @@ namespace Fonlow.Cli
                             propertyItem.SetValue(options, true, null);
                             if (optionValues.Length > 0)
                             {
-                                builder.AppendLine(String.Format("Boolean option {0} should not have explicit values.", optionName));
+                                builder.AppendLine(string.Format("Boolean option {0} should not have explicit values.", optionName));
                             }
                             continue;
                         }
 
                         if (optionValues.Length == 0)
                         {
-                            builder.AppendLine(String.Format("Option {0} expects some values but no value is found with this option.", optionAttribute.Name));
+                            builder.AppendLine(string.Format("Option {0} expects some values but no value is found with this option.", optionAttribute.Name));
                             continue;
                         }
 
@@ -180,8 +180,8 @@ namespace Fonlow.Cli
 
                             if (optionValues.Length > 1)
                             {
-                                builder.Append(String.Format(String.Format("Option {0} of type {1} has more than one value assigned: {2}. However, the first value {3} is used."
-                                    , optionName, propertyItem.PropertyType.ToString(), String.Join(", ", optionValues), valueText)));
+                                builder.Append(string.Format(string.Format("Option {0} of type {1} has more than one value assigned: {2}. However, the first value {3} is used."
+                                    , optionName, propertyItem.PropertyType.ToString(), string.Join(", ", optionValues), valueText)));
                             }
 
                             if (propertyItem.PropertyType == typeof(string))
@@ -190,7 +190,7 @@ namespace Fonlow.Cli
                                 continue;
                             }
 
-                            Action addError = () => { builder.AppendLine(String.Format("Option {0} of type {1} has some invalid value {2}", optionName, propertyItem.PropertyType.ToString(), valueText)); };
+                            Action addError = () => { builder.AppendLine(string.Format("Option {0} of type {1} has some invalid value {2}", optionName, propertyItem.PropertyType.ToString(), valueText)); };
 
                             if (propertyItem.PropertyType == typeof(int))
                             {
@@ -336,11 +336,11 @@ namespace Fonlow.Cli
                                 }
                                 catch (ArgumentException e)
                                 {
-                                    builder.AppendLine(String.Format("Option {0} has some invalid values {1}. {2}", optionAttribute.Name, optionValues, e.Message));
+                                    builder.AppendLine(string.Format("Option {0} has some invalid values {1}. {2}", optionAttribute.Name, optionValues, e.Message));
                                 }
                                 catch (OverflowException e)
                                 {
-                                    builder.AppendLine(String.Format("Option {0} has some values {1} out of range. {2}", optionAttribute.Name, optionValues, e.Message));
+                                    builder.AppendLine(string.Format("Option {0} has some values {1} out of range. {2}", optionAttribute.Name, optionValues, e.Message));
                                 }
 
 
@@ -408,7 +408,7 @@ namespace Fonlow.Cli
             var unknown = optionsDic.Keys.Where(d => ! allParameterNames.Any(p => p.Equals(d, StringComparison.CurrentCultureIgnoreCase))).ToArray();
             if (unknown.Length > 0)
             {
-                builder.AppendLine("Unknown options: " + String.Join(" ", unknown));
+                builder.AppendLine("Unknown options: " + string.Join(" ", unknown));
             }
 
             return builder.ToString();
@@ -426,11 +426,11 @@ namespace Fonlow.Cli
                 }
                 catch (FormatException e)
                 {
-                    builder.AppendLine(String.Format("Option {0} has some invalid values in ( {1} ). {2}", optionAttribute.Name, String.Join(", ", optionValues), e.Message));
+                    builder.AppendLine(string.Format("Option {0} has some invalid values in ( {1} ). {2}", optionAttribute.Name, string.Join(", ", optionValues), e.Message));
                 }
                 catch (OverflowException e)
                 {
-                    builder.AppendLine(String.Format("Option {0} has some values in ( {1} ) out of range. {2}", optionAttribute.Name, String.Join(", ", optionValues), e.Message));
+                    builder.AppendLine(string.Format("Option {0} has some values in ( {1} ) out of range. {2}", optionAttribute.Name, string.Join(", ", optionValues), e.Message));
                 }
 
                 return true;

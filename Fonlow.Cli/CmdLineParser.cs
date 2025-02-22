@@ -86,7 +86,7 @@ namespace Fonlow.Cli
         /// of the option manager object (i.e. which properties has been set or not) is undefined.</remarks>
         public void Parse(string commandLine, bool containsExecutable)
         {
-            if (String.IsNullOrWhiteSpace(commandLine))
+            if (string.IsNullOrWhiteSpace(commandLine))
                 throw new ArgumentNullException("commandLine");
 
             if (containsExecutable)
@@ -99,7 +99,7 @@ namespace Fonlow.Cli
                 }
                 else
                 {
-                    ErrorMessage = String.Format("Commandline {0} looks very strange.", commandLine);
+                    ErrorMessage = string.Format("Commandline {0} looks very strange.", commandLine);
                 }
             }
             else
@@ -168,7 +168,7 @@ namespace Fonlow.Cli
         {
             var parserErrorMessage = OptionsReader.ReadOptions(commandLine, options);
             var validationErrorMessage = OptionsValidator.AnalyzeAssignedOptions(options);
-            if (String.IsNullOrEmpty(parserErrorMessage) && String.IsNullOrEmpty(validationErrorMessage))
+            if (string.IsNullOrEmpty(parserErrorMessage) && string.IsNullOrEmpty(validationErrorMessage))
                 return null;
 
             return parserErrorMessage + Environment.NewLine + validationErrorMessage;
@@ -178,7 +178,7 @@ namespace Fonlow.Cli
         {
             var parserErrorMessage = OptionsReader.ReadOptions(args, options);
             var validationErrorMessage = OptionsValidator.AnalyzeAssignedOptions(options);
-            if (String.IsNullOrEmpty(parserErrorMessage) && String.IsNullOrEmpty(validationErrorMessage))
+            if (string.IsNullOrEmpty(parserErrorMessage) && string.IsNullOrEmpty(validationErrorMessage))
                 return null;
 
             return parserErrorMessage + Environment.NewLine + validationErrorMessage;
@@ -209,7 +209,7 @@ namespace Fonlow.Cli
         /// <summary>
         /// True if there exists error message
         /// </summary>
-        public bool HasErrors { get { return !String.IsNullOrEmpty(ErrorMessage); } }
+        public bool HasErrors { get { return !string.IsNullOrEmpty(ErrorMessage); } }
 
         /// <summary>
         /// Gets the path to the executable of this application if it was included on the command line (it normally is), or null otherwise.

@@ -89,7 +89,7 @@ namespace Fonlow.Cli
         {
             if (PropertyType == typeof(string))
             {
-                return String.Empty;
+                return string.Empty;
             }
 
             if (PropertyType == typeof(bool))
@@ -150,7 +150,7 @@ namespace Fonlow.Cli
             AttributeCollection attributeCollection = TypeDescriptor.GetAttributes(t);
             TypeConverterAttribute converterAttribute = attributeCollection[typeof(TypeConverterAttribute)] as TypeConverterAttribute;
 
-            if ((converterAttribute != null) && (!String.IsNullOrEmpty(converterAttribute.ConverterTypeName)))
+            if ((converterAttribute != null) && (!string.IsNullOrEmpty(converterAttribute.ConverterTypeName)))
             {
                 Type converterType = Type.GetType(converterAttribute.ConverterTypeName);
                 if (converterType != null)

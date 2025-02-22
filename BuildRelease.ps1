@@ -1,0 +1,1 @@
+﻿dotnet build CliGui.sln  --configuration Release --no-incremental

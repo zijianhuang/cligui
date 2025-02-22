@@ -13,7 +13,7 @@ namespace TestBetter
             var options = new Options();
             var s = OptionsReader.ReadOptions("/F DoSomething /Intp 1234 /filters f1 \"Akk kB\" f3 \"kke fff\" /byteP 123", options);
             System.Diagnostics.Trace.TraceWarning(s);
-            Assert.True(String.IsNullOrEmpty(s));
+            Assert.True(string.IsNullOrEmpty(s));
             Assert.Equal("DoSomething", options.Function);
             Assert.Equal(1234, options.IntP);
             //   Assert.Equal(123, options.ByteP);
@@ -28,7 +28,7 @@ namespace TestBetter
             var options = new Options();
             var s = OptionsReader.ReadOptions("/Help", options);
             Assert.True(options.Help);
-            Assert.True(String.IsNullOrEmpty(s));
+            Assert.True(string.IsNullOrEmpty(s));
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace TestBetter
         {
             var options = new Options();
             var s = OptionsReader.ReadOptions("/Help Redundant", options);
-            Assert.False(String.IsNullOrEmpty(s));
+            Assert.False(string.IsNullOrEmpty(s));
 
             Assert.True(options.Help);
         }
@@ -48,7 +48,7 @@ namespace TestBetter
             var options = new Options();
             var s = OptionsReader.ReadOptions(args, options);
             System.Diagnostics.Trace.TraceWarning(s);
-            Assert.True(String.IsNullOrEmpty(s));
+            Assert.True(string.IsNullOrEmpty(s));
             Assert.Equal("DoSomething", options.Function);
 
         }
@@ -60,7 +60,7 @@ namespace TestBetter
             var options = new Options();
             var s = OptionsReader.ReadOptions(args, options);
             System.Diagnostics.Trace.TraceWarning(s);
-            Assert.True(String.IsNullOrEmpty(s));
+            Assert.True(string.IsNullOrEmpty(s));
             Assert.Equal("Do Something", options.Function);
 
         }

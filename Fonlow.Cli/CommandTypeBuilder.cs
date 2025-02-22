@@ -100,9 +100,9 @@ namespace Fonlow.Cli
 					}
 
 					string displayName = optionAttribute.Name;
-					if (String.IsNullOrEmpty(displayName))
+					if (string.IsNullOrEmpty(displayName))
 					{
-						if (String.IsNullOrEmpty(displayName))
+						if (string.IsNullOrEmpty(displayName))
 						{
 							displayName = propertyItem.Name;
 							optionAttribute.Name = displayName;
@@ -117,12 +117,12 @@ namespace Fonlow.Cli
 						bool foundGroupAttribute = groupNamesDic.TryGetValue(optionAttribute.GroupId, out groupAttribute);
 						if (foundGroupAttribute)
 						{
-							category = String.IsNullOrEmpty(groupAttribute.Name) ? groupAttribute.Id : groupAttribute.Name;
+							category = string.IsNullOrEmpty(groupAttribute.Name) ? groupAttribute.Id : groupAttribute.Name;
 						}
 					}
 
 					CreateCustomAttributeWith1ParameterCtorOfProperty(propertyBuilder, typeof(DisplayNameAttribute), typeof(string), displayName);
-					if (!String.IsNullOrEmpty(optionAttribute.Description))
+					if (!string.IsNullOrEmpty(optionAttribute.Description))
 					{
 						CreateCustomAttributeWith1ParameterCtorOfProperty(propertyBuilder, typeof(DescriptionAttribute), typeof(string), optionAttribute.Description);
 					}

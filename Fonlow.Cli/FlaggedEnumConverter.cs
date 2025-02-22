@@ -52,7 +52,7 @@ namespace Fonlow.Cli
             if (destinationType == typeof(string))
             {
                 int flagsInt = (int)value;
-                string str = String.Empty;
+                string str = string.Empty;
                 for (int i = 0; i < flagTotal; i++)
                 {
                     int flagMark = 1 << i;
@@ -85,7 +85,7 @@ namespace Fonlow.Cli
                 int flagsInt = 0;
                 foreach (char s in v)
                 {
-                    int index = flagCharacters.IndexOf(Char.ToUpper(s));
+                    int index = flagCharacters.IndexOf(char.ToUpper(s));
                     if (index >= 0)
                     {
                         flagsInt |= 1 << index;

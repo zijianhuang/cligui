@@ -584,17 +584,17 @@ namespace Fonlow.CommandLineGui.Robocopy
 			var r = SlashAPlus & SlashAMinus;
 			if (r != Rashcneto.None)
 			{
-				builder.AppendLine(String.Format("Option A+ and Option A- have some conflicits, sharing common flags: {0}", r));
+				builder.AppendLine(string.Format("Option A+ and Option A- have some conflicits, sharing common flags: {0}", r));
 			}
 
 			var r2 = SlashIa & SlashXa;
 			if (r2 != Rashcneto.None)
 			{
-				builder.AppendLine(String.Format("Option Ia and Option Xa have some conflicits, sharing common flags: {0}", r));
+				builder.AppendLine(string.Format("Option Ia and Option Xa have some conflicits, sharing common flags: {0}", r));
 			}
 
 			var s = builder.ToString();
-			if (!String.IsNullOrEmpty(s))
+			if (!string.IsNullOrEmpty(s))
 			{
 				throw new InvalidParametersException(s);
 			}

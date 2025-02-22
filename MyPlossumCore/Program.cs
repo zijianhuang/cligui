@@ -39,7 +39,7 @@ namespace MyPlossum
 
             if (options.Filters != null)
             {
-                Console.WriteLine("Filters: " + String.Join(", ", options.Filters));
+                Console.WriteLine("Filters: " + string.Join(", ", options.Filters));
             }
             
 

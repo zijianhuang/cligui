@@ -122,15 +122,15 @@ namespace Fonlow.Cli
 
             list2.Add(builder.ToString());
 
-            string format = String.Format("{{0,{0}}}{{1,-{1}}}{{2,-{2}}}", indent, column1Width, column2Width);
+            string format = string.Format("{{0,{0}}}{{1,-{1}}}{{2,-{2}}}", indent, column1Width, column2Width);
 
             var maxLines = Math.Max(list1.Count, list2.Count);
             StringBuilder result = new StringBuilder();
             for (int i = 0; i < maxLines; i++)
             {
-                var column1Text = list1.Count > i ? list1[i] : String.Empty;
-                var column2Text = list2.Count > i ? list2[i] : String.Empty;
-                result.AppendLine(String.Format(format, " ", column1Text, column2Text));
+                var column1Text = list1.Count > i ? list1[i] : string.Empty;
+                var column2Text = list2.Count > i ? list2[i] : string.Empty;
+                result.AppendLine(string.Format(format, " ", column1Text, column2Text));
             }
 
             return result.ToString();
@@ -182,7 +182,7 @@ namespace Fonlow.Cli
                 foreach (var optionsInGroup in optionAttributesGrouped)
                 {
                     var groupId = optionsInGroup.Key;
-                    if (!String.IsNullOrEmpty(groupId))
+                    if (!string.IsNullOrEmpty(groupId))
                     {
                         CommandLineOptionGroupAttribute groupAttribute = null;
                         parser.GroupAttributesDic.TryGetValue(groupId, out groupAttribute);
@@ -203,7 +203,7 @@ namespace Fonlow.Cli
                         {
                             bb.Append(", ");
                             var aliasesWithSeparator = option.AliasesArray.Select(d => s + d).ToArray();
-                            bb.Append(String.Join(", ", aliasesWithSeparator));
+                            bb.Append(string.Join(", ", aliasesWithSeparator));
                         }
 
                         builder.Append(  CreateColumnsText(3, 20, bb.ToString(), option.Description));
