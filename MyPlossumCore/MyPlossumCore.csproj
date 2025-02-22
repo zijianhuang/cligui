@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<OutputType>Exe</OutputType>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Fonlow.Cli\Fonlow.Cli.csproj" />
+	</ItemGroup>
+
+	<PropertyGroup>
+
+		<AssemblyTitle>MyPlossum</AssemblyTitle>
+		<Company>Microsoft</Company>
+		<Product>MyPlossum</Product>
+		<Copyright>Copyright © Microsoft 2013</Copyright>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+	</PropertyGroup>
+</Project>
