@@ -1,22 +1,22 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
 
 namespace Fonlow.Cli
 {
 	[Serializable]
-    public class InvalidParametersException : Exception
-    {
-        public InvalidParametersException():base()
-        {
+	public class InvalidParametersException : Exception
+	{
+		public InvalidParametersException():base()
+		{
 
-        }
+		}
 
-        public InvalidParametersException(string message):base(message) { }
+		public InvalidParametersException(string message):base(message) { }
 
-        public InvalidParametersException(string message, Exception innerException)
-            : base(message, innerException)
-        {
+		public InvalidParametersException(string message, Exception innerException)
+			: base(message, innerException)
+		{
 
-        }
-    }
+		}
+	}
 
 }

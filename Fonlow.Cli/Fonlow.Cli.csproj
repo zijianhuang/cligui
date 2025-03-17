@@ -3,7 +3,6 @@
 	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
 		<Authors>Zijian Huang</Authors>
-		<ImplicitUsings>enable</ImplicitUsings>
 		<Description>For .NET console app with many complex parameters.</Description>
 		<PackageReleaseNotes>.NET 9</PackageReleaseNotes>
 		<NeutralLanguage>en</NeutralLanguage>
@@ -12,7 +11,7 @@
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<Version>1.1.1</Version>
+		<Version>1.2</Version>
 		<PackageTags>.NET,Console,</PackageTags>
 		<RepositoryUrl>https://github.com/zijianhuang/cligui</RepositoryUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
