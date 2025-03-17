@@ -196,8 +196,7 @@ namespace Fonlow.Cli
 		/// </summary>
 		public virtual string PickupParameterAtPosition(string commandText, int position)
 		{
-			if (commandText == null)
-				throw new ArgumentNullException("commandText");
+			ArgumentNullException.ThrowIfNull(commandText);
 
 			int prefixLen = optionSeparator.Length;
 
@@ -247,10 +246,7 @@ namespace Fonlow.Cli
 		/// <returns></returns>
 		public string GetParameterDescription(string parameterName)
 		{
-			if (parameterName == null)
-			{
-				throw new ArgumentNullException("parameterName");
-			}
+			ArgumentNullException.ThrowIfNull(parameterName);
 
 			foreach (PropertyInfo propertyInfo in propertiesOfParametersAndOptions)
 			{

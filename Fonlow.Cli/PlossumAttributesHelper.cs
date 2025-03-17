@@ -10,12 +10,9 @@ namespace Fonlow.Cli
     {
         public static CommandLineOptionAttribute GetCommandLineOptionAttribute(MemberInfo memberInfo)
         {
-            if (memberInfo == null)
-            {
-                throw new ArgumentNullException("memberInfo");
-            }
+			ArgumentNullException.ThrowIfNull(memberInfo);
 
-            object[] objects = memberInfo.GetCustomAttributes(typeof(CommandLineOptionAttribute), false);
+			object[] objects = memberInfo.GetCustomAttributes(typeof(CommandLineOptionAttribute), false);
             if (objects.Length == 1)
             {
                 return (objects[0] as CommandLineOptionAttribute);
@@ -26,12 +23,9 @@ namespace Fonlow.Cli
 
         public static CommandLineManagerAttribute GetCommandLineManagerAttribute(Type type)
         {
-            if (type == null)
-            {
-                throw new ArgumentNullException("type");
-            }
+			ArgumentNullException.ThrowIfNull(type);
 
-            var customAttributes = type.GetCustomAttributes(typeof(CommandLineManagerAttribute), false);
+			var customAttributes = type.GetCustomAttributes(typeof(CommandLineManagerAttribute), false);
             if (customAttributes.Length == 1)
             {
                 return (customAttributes[0] as CommandLineManagerAttribute);
@@ -41,12 +35,9 @@ namespace Fonlow.Cli
 
         public static Dictionary<string, CommandLineOptionGroupAttribute> GetCommandLineOptionGroupAttributesDic(Type type)
         {
-            if (type == null)
-            {
-                throw new ArgumentNullException("type");
-            }
+			ArgumentNullException.ThrowIfNull(type);
 
-            var dic = new Dictionary<string, CommandLineOptionGroupAttribute>();
+			var dic = new Dictionary<string, CommandLineOptionGroupAttribute>();
             var customAttributes = type.GetCustomAttributes(typeof(CommandLineOptionGroupAttribute), false);
             foreach (var item in customAttributes)
             {
@@ -58,10 +49,9 @@ namespace Fonlow.Cli
 
         public static CommandLineOptionAttribute[] GetCommandLineOptionAttributes(Type optionsType)
         {
-            if (optionsType == null)
-                throw new ArgumentNullException("optionsType");
+			ArgumentNullException.ThrowIfNull(optionsType);
 
-            var propertiesOfOptions = optionsType.GetProperties();
+			var propertiesOfOptions = optionsType.GetProperties();
             var r = propertiesOfOptions
                 .Select((propertyItem) => ReadCommandLineOptionAttribute(propertyItem))
                 .Where(d => d != null)
@@ -78,10 +68,9 @@ namespace Fonlow.Cli
 
         public static PropertyInfo[] GetOptionProperties(Type optionsType)
         {
-            if (optionsType == null)
-                throw new ArgumentNullException("optionsType");
+			ArgumentNullException.ThrowIfNull(optionsType);
 
-            var propertiesOfOptions = optionsType.GetProperties();
+			var propertiesOfOptions = optionsType.GetProperties();
             var r = propertiesOfOptions
                 .Where((propertyItem) => { var a = ReadCommandLineOptionAttribute(propertyItem); return a != null; })
                 .ToArray();
@@ -91,12 +80,9 @@ namespace Fonlow.Cli
 
         internal static CommandLineOptionAttribute ReadCommandLineOptionAttribute(MemberInfo memberInfo)
         {
-            if (memberInfo == null)
-            {
-                throw new ArgumentNullException("memberInfo");
-            }
+			ArgumentNullException.ThrowIfNull(memberInfo);
 
-            object[] objects = memberInfo.GetCustomAttributes(typeof(CommandLineOptionAttribute), false);
+			object[] objects = memberInfo.GetCustomAttributes(typeof(CommandLineOptionAttribute), false);
             if (objects.Length == 1)
             {
                 var optionAttribute = objects[0] as CommandLineOptionAttribute;

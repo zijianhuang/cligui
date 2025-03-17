@@ -36,6 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Fonlow.CliGui\Fonlow.CliGui.csproj" />
     <ProjectReference Include="..\Fonlow.Cli\Fonlow.Cli.csproj" />
   </ItemGroup>
   <PropertyGroup>

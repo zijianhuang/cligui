@@ -15,10 +15,9 @@ namespace Fonlow.Cli
 
         public static string AnalyzeAssignedOptions(object optionsAssigned)
         {
-            if (optionsAssigned == null)
-                throw new ArgumentNullException("optionsAssigned");
+			ArgumentNullException.ThrowIfNull(optionsAssigned);
 
-            var typeOfParametersAndOptions = optionsAssigned.GetType();
+			var typeOfParametersAndOptions = optionsAssigned.GetType();
             var propertiesOfParametersAndOptions = new List<PropertyInfo>(typeOfParametersAndOptions.GetProperties());
             var managerAttribute = PlossumAttributesHelper.GetCommandLineManagerAttribute(typeOfParametersAndOptions);
             var isCaseSensitive = managerAttribute.IsCaseSensitive;

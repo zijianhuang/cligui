@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BetterTests", "Tests\Better
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fonlow.Cli", "Fonlow.Cli\Fonlow.Cli.csproj", "{39227A94-069A-4DD3-90B6-5C22728DFFAD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fonlow.CliGui", "Fonlow.CliGui\Fonlow.CliGui.csproj", "{B6AA7CDC-386F-41E5-A101-E534536471F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{39227A94-069A-4DD3-90B6-5C22728DFFAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39227A94-069A-4DD3-90B6-5C22728DFFAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39227A94-069A-4DD3-90B6-5C22728DFFAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6AA7CDC-386F-41E5-A101-E534536471F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6AA7CDC-386F-41E5-A101-E534536471F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6AA7CDC-386F-41E5-A101-E534536471F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6AA7CDC-386F-41E5-A101-E534536471F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
