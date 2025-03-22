@@ -19,10 +19,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<CodeAnalysisDictionary Include="..\CustomDictionary.xml" Link="CustomDictionary.xml" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.2" />
 	</ItemGroup>
 

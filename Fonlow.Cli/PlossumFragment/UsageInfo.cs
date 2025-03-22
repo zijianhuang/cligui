@@ -174,10 +174,9 @@ namespace Fonlow.Cli
         {
             StringBuilder builder = new StringBuilder();
            
-            if (parser.OptionAttributes.Length>0)
+            if (parser.ModelOptionAttributes.Length>0)
             {
-                builder.AppendLine("version");
-                var optionAttributesGrouped = parser.OptionAttributes.GroupBy(d => d.GroupId).OrderBy(k=>k.Key);
+                var optionAttributesGrouped = parser.ModelOptionAttributes.GroupBy(d => d.GroupId).OrderBy(k=>k.Key);
 
                 foreach (var optionsInGroup in optionAttributesGrouped)
                 {
@@ -185,7 +184,7 @@ namespace Fonlow.Cli
                     if (!string.IsNullOrEmpty(groupId))
                     {
                         CommandLineOptionGroupAttribute groupAttribute = null;
-                        parser.GroupAttributesDic.TryGetValue(groupId, out groupAttribute);
+                        parser.ModelGroupAttributesDic.TryGetValue(groupId, out groupAttribute);
 
                         string groupName = groupAttribute == null ? null : groupAttribute.Name;
                         if (groupName != null)
@@ -197,7 +196,7 @@ namespace Fonlow.Cli
                     foreach (var option in optionsInGroup)
                     {
                         StringBuilder bb = new StringBuilder();
-                        string s = parser.CommandLineManagerAttribute.OptionSeparator;
+                        string s = parser.ModelCommandLineManagerAttribute.OptionSeparator;
                         bb.Append(s + option.Name);
                         if (option.AliasesArray != null)
                         {

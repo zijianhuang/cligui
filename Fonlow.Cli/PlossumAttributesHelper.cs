@@ -6,102 +6,102 @@ using System.Reflection;
 
 namespace Fonlow.Cli
 {
-    public static class PlossumAttributesHelper
-    {
-        public static CommandLineOptionAttribute GetCommandLineOptionAttribute(MemberInfo memberInfo)
-        {
+	public static class PlossumAttributesHelper
+	{
+		public static CommandLineOptionAttribute GetCommandLineOptionAttribute(MemberInfo memberInfo)
+		{
 			ArgumentNullException.ThrowIfNull(memberInfo);
 
 			object[] objects = memberInfo.GetCustomAttributes(typeof(CommandLineOptionAttribute), false);
-            if (objects.Length == 1)
-            {
-                return (objects[0] as CommandLineOptionAttribute);
-            }
-            return null;
-        }
+			if (objects.Length == 1)
+			{
+				return (objects[0] as CommandLineOptionAttribute);
+			}
+			return null;
+		}
 
 
-        public static CommandLineManagerAttribute GetCommandLineManagerAttribute(Type type)
-        {
+		public static CommandLineManagerAttribute GetCommandLineManagerAttribute(Type type)
+		{
 			ArgumentNullException.ThrowIfNull(type);
 
 			var customAttributes = type.GetCustomAttributes(typeof(CommandLineManagerAttribute), false);
-            if (customAttributes.Length == 1)
-            {
-                return (customAttributes[0] as CommandLineManagerAttribute);
-            }
-            return null;
-        }
+			if (customAttributes.Length == 1)
+			{
+				return (customAttributes[0] as CommandLineManagerAttribute);
+			}
+			return null;
+		}
 
-        public static Dictionary<string, CommandLineOptionGroupAttribute> GetCommandLineOptionGroupAttributesDic(Type type)
-        {
+		public static Dictionary<string, CommandLineOptionGroupAttribute> GetCommandLineOptionGroupAttributesDic(Type type)
+		{
 			ArgumentNullException.ThrowIfNull(type);
 
 			var dic = new Dictionary<string, CommandLineOptionGroupAttribute>();
-            var customAttributes = type.GetCustomAttributes(typeof(CommandLineOptionGroupAttribute), false);
-            foreach (var item in customAttributes)
-            {
-                var att = item as CommandLineOptionGroupAttribute;
-                dic.Add(att.Id, att);
-            }
-            return dic;
-        }
+			var customAttributes = type.GetCustomAttributes(typeof(CommandLineOptionGroupAttribute), false);
+			foreach (var item in customAttributes)
+			{
+				var att = item as CommandLineOptionGroupAttribute;
+				dic.Add(att.Id, att);
+			}
+			return dic;
+		}
 
-        public static CommandLineOptionAttribute[] GetCommandLineOptionAttributes(Type optionsType)
-        {
+		public static CommandLineOptionAttribute[] GetCommandLineOptionAttributes(Type optionsType)
+		{
 			ArgumentNullException.ThrowIfNull(optionsType);
 
 			var propertiesOfOptions = optionsType.GetProperties();
-            var r = propertiesOfOptions
-                .Select((propertyItem) => ReadCommandLineOptionAttribute(propertyItem))
-                .Where(d => d != null)
-                .ToArray();
+			var r = propertiesOfOptions
+				.Select((propertyItem) => ReadCommandLineOptionAttribute(propertyItem))
+				.Where(d => d != null)
+				.ToArray();
 
-            var c = propertiesOfOptions.Count() - r.Length;
-            if (c > 0)
-            {
-                System.Diagnostics.Trace.TraceError("You programmer have some properties in optionsType not decorated by CommandLineOptionAttribute. The total number of offenders is {0}.", c);
-            }
+			var c = propertiesOfOptions.Length - r.Length;
+			if (c > 0)
+			{
+				System.Diagnostics.Trace.TraceError("You programmer have some properties in optionsType not decorated by CommandLineOptionAttribute. The total number of offenders is {0}.", c);
+			}
 
-            return r;
-        }
+			return r;
+		}
 
-        public static PropertyInfo[] GetOptionProperties(Type optionsType)
-        {
+		public static PropertyInfo[] GetOptionProperties(Type optionsType)
+		{
 			ArgumentNullException.ThrowIfNull(optionsType);
 
 			var propertiesOfOptions = optionsType.GetProperties();
-            var r = propertiesOfOptions
-                .Where((propertyItem) => { var a = ReadCommandLineOptionAttribute(propertyItem); return a != null; })
-                .ToArray();
+			var r = propertiesOfOptions
+				.Where((propertyItem) => { var a = ReadCommandLineOptionAttribute(propertyItem); return a != null; })
+				.ToArray();
 
-            return r;
-        }
+			return r;
+		}
 
-        internal static CommandLineOptionAttribute ReadCommandLineOptionAttribute(MemberInfo memberInfo)
-        {
+		internal static CommandLineOptionAttribute ReadCommandLineOptionAttribute(MemberInfo memberInfo)
+		{
 			ArgumentNullException.ThrowIfNull(memberInfo);
 
 			object[] objects = memberInfo.GetCustomAttributes(typeof(CommandLineOptionAttribute), false);
-            if (objects.Length == 1)
-            {
-                var optionAttribute = objects[0] as CommandLineOptionAttribute;
-                if (optionAttribute != null)
-                {
-                    if (string.IsNullOrWhiteSpace(optionAttribute.Name))
-                    {
-                        optionAttribute.Name = memberInfo.Name;
-                    }
-                }
+			if (objects.Length == 1)
+			{
+				var optionAttribute = objects[0] as CommandLineOptionAttribute;
+				if (optionAttribute != null)
+				{
+					if (string.IsNullOrWhiteSpace(optionAttribute.Name))
+					{
+						optionAttribute.Name = memberInfo.Name;
+					}
+				}
 
-                return optionAttribute;
-            }
-            return null;
-        }
+				return optionAttribute;
+			}
+			return null;
+		}
 
 
 
-    }
+	}
 
 
 

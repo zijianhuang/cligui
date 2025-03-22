@@ -14,7 +14,9 @@ namespace Fonlow.Cli
 
 		public static string SimplyQuoteString(string s)
 		{
-			if (s.Contains(" "))
+			if (s == null) return null;
+
+			if (s.Contains(' ', StringComparison.Ordinal))
 			{
 				return "\"" + s + "\"";
 			}
@@ -70,6 +72,8 @@ namespace Fonlow.Cli
 		/// <returns></returns>
 		public static object ReadDefaultValue(PropertyInfo propertyInfo)
 		{
+			ArgumentNullException.ThrowIfNull(propertyInfo);
+
 			object[] objects = propertyInfo.GetCustomAttributes(typeof(DefaultValueAttribute), false);
 			if (objects.Length == 1)
 			{
@@ -81,6 +85,8 @@ namespace Fonlow.Cli
 
 		public static object GetDefaultValueOfType(Type PropertyType)
 		{
+			ArgumentNullException.ThrowIfNull(PropertyType);
+
 			if (PropertyType == typeof(string))
 			{
 				return string.Empty;

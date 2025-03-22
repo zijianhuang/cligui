@@ -161,7 +161,7 @@ namespace Fonlow.Cli
 							propertyItem.SetValue(options, true, null);
 							if (optionValues.Length > 0)
 							{
-								builder.AppendLine(string.Format("Boolean option {0} should not have explicit values.", optionName));
+								builder.AppendLine($"Boolean option {optionName} should not have explicit values.");
 							}
 							continue;
 						}

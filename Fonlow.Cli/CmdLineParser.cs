@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Fonlow.Cli
 {
 	/// <summary>
-	/// This class shares a subset of the interfaces of Plossum's CommandLineParser, as a replacement.
+	/// Parse object that represent CLI parameters.
 	/// </summary>
 	public class CommandLineParser
 	{
@@ -21,21 +19,21 @@ namespace Fonlow.Cli
 
 			Options = options;
 
-			CommandLineManagerAttribute = PlossumAttributesHelper.GetCommandLineManagerAttribute(options.GetType());
+			ModelCommandLineManagerAttribute = PlossumAttributesHelper.GetCommandLineManagerAttribute(options.GetType());
 
-			OptionAttributes = PlossumAttributesHelper.GetCommandLineOptionAttributes(options.GetType());
+			ModelOptionAttributes = PlossumAttributesHelper.GetCommandLineOptionAttributes(options.GetType());
 
-			GroupAttributesDic = PlossumAttributesHelper.GetCommandLineOptionGroupAttributesDic(options.GetType());
+			ModelGroupAttributesDic = PlossumAttributesHelper.GetCommandLineOptionGroupAttributesDic(options.GetType());
 		}
 
 		internal object Options { get; private set; }
 
-		internal Plossum.CommandLine.CommandLineOptionAttribute[] OptionAttributes { get; private set; }
+		internal Plossum.CommandLine.CommandLineOptionAttribute[] ModelOptionAttributes { get; private set; }
 
 		/// <summary>
 		/// Mapping between GroupId and GroupAttribute.
 		/// </summary>
-		internal Dictionary<string, Plossum.CommandLine.CommandLineOptionGroupAttribute> GroupAttributesDic { get; private set; }
+		internal Dictionary<string, Plossum.CommandLine.CommandLineOptionGroupAttribute> ModelGroupAttributesDic { get; private set; }
 
 		UsageInfo usageInfo;
 
@@ -184,7 +182,6 @@ namespace Fonlow.Cli
 
 		static bool SplitCommandLine(string commandLine, out string command, out string argsText)
 		{
-			// regex: \w+([\.]\w+)*|("(([a-zA-Z]:)|(\\\\[^/\\:\*\?""<>\|]+(\\[a-zA-Z]\$)?))\\([^/\\:\*\?""<>\|]+\\)*[^/\\:\*\?""<>\|]+(\.[^/\\:\*\?""<>\|]+[^/\\:\*\?""<>\|\s])?") |((([a-zA-Z]:)|(\\\\[^/\\:\*\?""<>\|\s]+(\\[a-zA-Z]\$)?))\\([^/\\:\*\?""<>\|\s]+\\)*[^/\\:\*\?""<>\|\s]+(\.[a-zA-Z0-9]+)?)
 			Regex regex = new Regex("\\w+([\\.]\\w+)*|(\"(([a-zA-Z]:)|(\\\\\\\\[^/\\\\:\\*\\?\"\"<>\\|]+(\\\\[a-zA-Z]\\$)?))\\\\([^/\\\\:\\*\\?\"\"<>\\|]+\\\\)*[^/\\\\:\\*\\?\"\"<>\\|]+(\\.[^/\\\\:\\*\\?\"\"<>\\|]+[^/\\\\:\\*\\?\"\"<>\\|\\s])?\") |((([a-zA-Z]:)|(\\\\\\\\[^/\\\\:\\*\\?\"\"<>\\|\\s]+(\\\\[a-zA-Z]\\$)?))\\\\([^/\\\\:\\*\\?\"\"<>\\|\\s]+\\\\)*[^/\\\\:\\*\\?\"\"<>\\|\\s]+(\\.[a-zA-Z0-9]+)?)", RegexOptions.IgnorePatternWhitespace);
 			var match = regex.Match(commandLine);
 			if (match.Success)
@@ -216,14 +213,14 @@ namespace Fonlow.Cli
 		/// <remarks>This should only be evaluated after <see cref="Parse()"/> has been called.</remarks>
 		public string ExecutablePath { get; private set; }
 
-		internal Plossum.CommandLine.CommandLineManagerAttribute CommandLineManagerAttribute { get; private set; }
+		internal Plossum.CommandLine.CommandLineManagerAttribute ModelCommandLineManagerAttribute { get; private set; }
 
-		public string ApplicationName { get { return CommandLineManagerAttribute.ApplicationName; } }
+		public string ApplicationName { get { return ModelCommandLineManagerAttribute.ApplicationName; } }
 
-		public string ApplicationDescription { get { return CommandLineManagerAttribute.Description; } }
+		public string ApplicationDescription { get { return ModelCommandLineManagerAttribute.Description; } }
 
-		public string ApplicationCopyright { get { return CommandLineManagerAttribute.Copyright; } }
+		public string ApplicationCopyright { get { return ModelCommandLineManagerAttribute.Copyright; } }
 
-		public string ApplicationVersion { get { return CommandLineManagerAttribute.Version; } }
+		public string ApplicationVersion { get { return ModelCommandLineManagerAttribute.Version; } }
 	}
 }
