@@ -17,51 +17,52 @@ namespace Fonlow.Cli
 				return;
 			}
 
-			foreach (object objAttribute in assembly.GetCustomAttributes(false))
+			var productNamme= assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product;
+			if (productNamme != null)
 			{
-				AssemblyCopyrightAttribute copyrightAttribute = objAttribute as AssemblyCopyrightAttribute;
-				if (copyrightAttribute != null)
+				ApplicationName = productNamme;
+			}
+			else
+			{
+				var assemblyTitle = assembly.GetCustomAttribute<AssemblyTitleAttribute>()?.Title;
+				if (assemblyTitle != null)
 				{
-					Copyright = copyrightAttribute.Copyright;
-					continue;
-				}
-
-				AssemblyTitleAttribute titleAttribute = objAttribute as AssemblyTitleAttribute;
-				if (titleAttribute != null)
-				{
-					ApplicationName = titleAttribute.Title;
-					continue;
-				}
-
-				AssemblyDescriptionAttribute descriptionAttribute = objAttribute as AssemblyDescriptionAttribute;
-				if (descriptionAttribute != null)
-				{
-					Description = descriptionAttribute.Description;
-					continue;
+					ApplicationName = assemblyTitle;
 				}
 			}
 
+			var copyright = assembly.GetCustomAttribute<AssemblyCopyrightAttribute>()?.Copyright;
+			if (copyright!=null)
+			{
+				Copyright = copyright;
+			}
+
+			var description = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>()?.Description;
+			if (description != null)
+			{
+				Description = description;
+			}
 		}
 
 		/// <summary>
 		/// Gets or sets the name of the application.
 		/// </summary>
 		/// <value>The name of the application.</value>
-		/// <remarks>If not explicitly specified, this value will be retrieved from the assembly information.</remarks>
+		/// <remarks>If not explicitly specified, this value will be retrieved from the assembly Product or Title.</remarks>
 		public string ApplicationName { get; set; }
 
 		/// <summary>
 		/// Gets or sets the copyright message.
 		/// </summary>
 		/// <value>The copyright message.</value>
-		/// <remarks>If not explicitly specified, this value will be retrieved from the assembly information.</remarks>
+		/// <remarks>If not explicitly specified, this value will be retrieved from the assembly Copyright.</remarks>
 		public string Copyright { get; set; }
 
 		/// <summary>
 		/// Gets or sets the description.
 		/// </summary>
 		/// <value>The description.</value>
-		/// <remarks>If not explicitly specified, the application will be retrieved from the assembly information.</remarks>
+		/// <remarks>If not explicitly specified, the application will be retrieved from the assembly Description.</remarks>
 		public string Description { get; set; }
 
 		/// <summary>
