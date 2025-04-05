@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MyPlossumCore": {
+      "commandName": "Project",
+      "commandLineArgs": "/?"
+    }
+  }
+}

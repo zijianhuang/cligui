@@ -34,7 +34,7 @@ namespace Plossum.CommandLine
 	/// <remarks>This attribute is required for any class that is to act as a command line manager for parsing. It
 	/// may only be specified on a class and only one occurence may be specified.</remarks>
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple=false)]
-	public sealed class CommandLineManagerAttribute : System.Attribute
+	public class CommandLineManagerAttribute : System.Attribute
 	{
 		#region Constructors
 

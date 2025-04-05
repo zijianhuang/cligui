@@ -27,7 +27,7 @@ namespace Fonlow.CommandLineGui.Robocopy
 	[CommandLineOptionGroup(OptionGroups.LOGGING_OPTIONS)]
 	[CommandLineOptionGroup(OptionGroups.RETRY_OPTIONS)]
 	[CommandLineOptionGroup(OptionGroups.FILE_SELECTION_OPTIONS)]
-	[CommandLineManager(ApplicationName = "Robocopy", Description = "Robocopy options", RequireExplicitAssignment = true)]
+	[CliManager(ApplicationName = "Robocopy", Description = "Robocopy options", RequireExplicitAssignment = true)]
 	public class RobocopyOptions : IRefineOptions
 	{
 		[FixedParameter(Category = OptionGroups.TOP_CATEGORY, Description = @"Source Directory (drive:\path or \\server\share\path).",

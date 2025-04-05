@@ -53,7 +53,7 @@ namespace Fonlow.Cli
 			{
 				foreach (Type type in assembly.GetTypes())
 				{
-					if ((type.IsClass) && (PropertyHelper.ReadAttribute<CommandLineManagerAttribute>(type)!=null))
+					if ((type.IsClass) && (PropertyHelper.ReadAttribute<CliManagerAttribute>(type)!=null))
 					{
 						ICommand command = (ICommand)Activator.CreateInstance(typeof(Command), type);
 						if (command != null)
@@ -103,14 +103,14 @@ namespace Fonlow.Cli
 			propertiesOfParametersAndOptions = new List<PropertyInfo>(proxyTypeOfParametersAndOptions.GetProperties());
 			propertiesOfParametersAndOptions.Sort(ComparePropertyOrder);
 
-			commandLineManagerAttribute = PlossumAttributesHelper.GetCommandLineManagerAttribute(typeOfCommandOptions);
+			CliManagerAttribute = PlossumAttributesHelper.GetCommandLineManagerAttribute(typeOfCommandOptions);
 
 			ResetParameters();
 
-			assignment = commandLineManagerAttribute.Assignment;
+			assignment = CliManagerAttribute.Assignment;
 
 			const string template = @"\s*{0}(?<OptionName>\w*[\+|\-]?)";
-			optionSeparator = commandLineManagerAttribute.OptionSeparator;
+			optionSeparator = CliManagerAttribute.OptionSeparator;
 			optionNamePattern = string.Format(template, optionSeparator);
 
 			allGroupAttributesDic = PlossumAttributesHelper.GetCommandLineOptionGroupAttributesDic(proxyTypeOfParametersAndOptions);
@@ -127,7 +127,7 @@ namespace Fonlow.Cli
 
 		string optionSeparator;
 
-		CommandLineManagerAttribute commandLineManagerAttribute;
+		CliManagerAttribute CliManagerAttribute;
 
 		Dictionary<string, CommandLineOptionGroupAttribute> allGroupAttributesDic;
 
@@ -175,13 +175,13 @@ namespace Fonlow.Cli
 		}
 
 		/// <summary>
-		/// Command name is given by commandLineManagerAttribute.ApplicationName.
+		/// Command name is given by CliManagerAttribute.ApplicationName.
 		/// </summary>
 		public string CommandName
 		{
 			get
 			{
-				return commandLineManagerAttribute.ApplicationName;
+				return CliManagerAttribute.ApplicationName;
 			}
 		}
 
@@ -341,7 +341,7 @@ namespace Fonlow.Cli
 								allGroupAttributesDic.TryGetValue(optionAttribute.GroupId, out optionGroupAttribute);
 							}
 
-							bool toHaveAssign = NeedAssignment(commandLineManagerAttribute, optionGroupAttribute, optionAttribute);
+							bool toHaveAssign = NeedAssignment(CliManagerAttribute, optionGroupAttribute, optionAttribute);
 
 							if (!propertyInfo.PropertyType.IsEnum && !propertyValue.Equals(defaultValue)) //handle non enum
 							{
@@ -399,7 +399,7 @@ namespace Fonlow.Cli
 			}
 		}
 
-		static bool NeedAssignment(CommandLineManagerAttribute managerAttribute, CommandLineOptionGroupAttribute groupAttribute, CommandLineOptionAttribute optionAttriubte)
+		static bool NeedAssignment(CliManagerAttribute managerAttribute, CommandLineOptionGroupAttribute groupAttribute, CommandLineOptionAttribute optionAttriubte)
 		{
 			if (optionAttriubte.RequireExplicitAssignmentAssigned)
 				return optionAttriubte.RequireExplicitAssignment;

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Plossum.CommandLine;
+using Fonlow.Cli;
 
 namespace TestBetter
 {
-    [CommandLineManager(ApplicationName = "MyPlossum", Description = "Demostrate the power of Plossum",  Copyright = "Fonlow (c) 2013", Version = "1.1")]
+    [CliManager(ApplicationName = "MyPlossum", Description = "Demostrate the power of Plossum",  Copyright = "Fonlow (c) 2013", Version = "1.1")]
     [CommandLineOptionGroup("detail", Name = "Detail")]
     [CommandLineOptionGroup("other", Name = "Other")]
     public class Options
@@ -99,7 +100,7 @@ enum
     [Flags]
     public enum MyEnum { None = 0, Hello = 1, World = 2, Command = 4 };
 
-    [CommandLineManager(ApplicationName = "MyPicky")]
+    [CliManager(ApplicationName = "MyPicky")]
     [CommandLineOptionGroup("atMost1", Name = "AtMostOne", Require = OptionGroupRequirement.AtMostOne)]
     [CommandLineOptionGroup("atLeast1", Name = "AtLeastOne", Require = OptionGroupRequirement.AtLeastOne)]
     [CommandLineOptionGroup("exactly1", Name = "ExactlyOne", Require = OptionGroupRequirement.ExactlyOne)]
@@ -131,7 +132,7 @@ enum
         public string Option2All { get; set; }
     }
 
-    [CommandLineManager(ApplicationName = "MyPicky")]
+    [CliManager(ApplicationName = "MyPicky")]
     [CommandLineOptionGroup("atMost1", Name = "AtMostOne")]
     [CommandLineOptionGroup("atLeast1", Name = "AtLeastOne")]
     [CommandLineOptionGroup("exactly1", Name = "ExactlyOne")]
@@ -163,7 +164,7 @@ enum
         public string Option2All { get; set; }
     }
 
-    [CommandLineManager(ApplicationName = "MyPicky")]
+    [CliManager(ApplicationName = "MyPicky")]
     public class MaxOccursOptions
     {
         [CommandLineOption(MaxOccurs = 3, MinOccurs = 2)]
@@ -172,7 +173,7 @@ enum
 
     }
 
-    [CommandLineManager(ApplicationName = "MyPicky")]
+    [CliManager(ApplicationName = "MyPicky")]
     public class MaxOccursOptionsSilly
     {
         [CommandLineOption(MaxOccurs = 3)]
@@ -182,7 +183,7 @@ enum
         public int Integer { get; set; }
     }
 
-    [CommandLineManager(ApplicationName = "MyPicky")]
+    [CliManager(ApplicationName = "MyPicky")]
     public class NumericOptions
     {
         [CommandLineOption(MaxValue = 10000, MinValue = 10)]
@@ -196,7 +197,7 @@ enum
     /// <summary>
     /// decimal can not be attribute arguments since decimal is structure rather than premitive type.
     /// </summary>
-    [CommandLineManager(ApplicationName = "MyPicky")]
+    [CliManager(ApplicationName = "MyPicky")]
     public class DecimalOptions
     {
         [CommandLineOption(MaxValue = 10000, MinValue = 10)]

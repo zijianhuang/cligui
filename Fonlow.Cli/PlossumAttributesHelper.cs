@@ -21,14 +21,14 @@ namespace Fonlow.Cli
 		}
 
 
-		public static CommandLineManagerAttribute GetCommandLineManagerAttribute(Type type)
+		public static CliManagerAttribute GetCommandLineManagerAttribute(Type type)
 		{
 			ArgumentNullException.ThrowIfNull(type);
 
-			var customAttributes = type.GetCustomAttributes(typeof(CommandLineManagerAttribute), false);
+			var customAttributes = type.GetCustomAttributes(typeof(CliManagerAttribute), false);
 			if (customAttributes.Length == 1)
 			{
-				return (customAttributes[0] as CommandLineManagerAttribute);
+				return (customAttributes[0] as CliManagerAttribute);
 			}
 			return null;
 		}

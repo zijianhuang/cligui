@@ -213,7 +213,7 @@ namespace Fonlow.Cli
 		/// <remarks>This should only be evaluated after <see cref="Parse()"/> has been called.</remarks>
 		public string ExecutablePath { get; private set; }
 
-		internal Plossum.CommandLine.CommandLineManagerAttribute ModelCommandLineManagerAttribute { get; private set; }
+		internal Fonlow.Cli.CliManagerAttribute ModelCommandLineManagerAttribute { get; private set; }
 
 		public string ApplicationName { get { return ModelCommandLineManagerAttribute.ApplicationName; } }
 
@@ -221,6 +221,16 @@ namespace Fonlow.Cli
 
 		public string ApplicationCopyright { get { return ModelCommandLineManagerAttribute.Copyright; } }
 
-		public string ApplicationVersion { get { return ModelCommandLineManagerAttribute.Version; } }
+		public string ApplicationVersion
+		{
+			get
+			{
+				return ModelCommandLineManagerAttribute.ApplicationVersion;
+
+			}
+		}
+
+		public VersionSource VersionSource { get; set; } = VersionSource.FileVersion;
 	}
+
 }

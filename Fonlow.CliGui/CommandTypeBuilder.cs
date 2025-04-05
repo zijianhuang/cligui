@@ -204,9 +204,9 @@ namespace Fonlow.Cli
 
 		const BindingFlags namedPropertiesBindingFlags = BindingFlags.Public | BindingFlags.SetProperty | BindingFlags.DeclaredOnly | BindingFlags.Instance;
 
-		static void CopyCommandLineManagerAttribute(TypeBuilder typeBuilder, CommandLineManagerAttribute attribute)
+		static void CopyCommandLineManagerAttribute(TypeBuilder typeBuilder, CliManagerAttribute attribute)
 		{
-			Type type = typeof(CommandLineManagerAttribute);
+			Type type = typeof(CliManagerAttribute);
 			var classCtorInfo = type.GetConstructor(new Type[] { });
 			var propertyInfoArrayOfAttribute = GetNamedPropertyInfoArray(attribute);
 			var valuesOfproperties = propertyInfoArrayOfAttribute.Select(item => item.GetValue(attribute, null)).ToArray();
