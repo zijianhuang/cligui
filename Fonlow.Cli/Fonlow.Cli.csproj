@@ -11,7 +11,7 @@
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<Version>1.3</Version>
+		<Version>1.3.1</Version>
 		<PackageTags>.NET,Console,</PackageTags>
 		<RepositoryUrl>https://github.com/zijianhuang/cligui</RepositoryUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>

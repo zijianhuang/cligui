@@ -47,7 +47,9 @@ namespace MyPlossum
 		}
 	}
 
-	[CliManager(ApplicationName = "MyPlossum", Description = "Demostrate the power of Plossum", OptionSeparator = "/", Assignment = ":", Version ="1.11")]
+	[CliManager(ApplicationName = "MyPlossum", Description = "Demostrate the power of Plossum", OptionSeparator = "/", Assignment = ":"
+	//Version ="1.11"
+	)]
 	[CommandLineOptionGroup("detail", Name = "Detail")]
 	[CommandLineOptionGroup("other", Name = "Other")]
 	public class Options

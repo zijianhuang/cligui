@@ -225,7 +225,7 @@ namespace Fonlow.Cli
 		{
 			get
 			{
-				return ModelCommandLineManagerAttribute.ApplicationVersion;
+				return ModelCommandLineManagerAttribute.Version;
 
 			}
 		}
