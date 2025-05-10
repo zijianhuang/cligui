@@ -21,4 +21,4 @@ You may use the core library to wrap existing command line programs like Robocop
 
 ## References
 
-* [Get the Best of Both Worlds: Command Line and GUI](https://www.codeproject.com/Articles/649950/Get-the-Best-of-Both-Worlds-Command-Line-and-GUI)
+* [Get the Best of Both Worlds: Command Line and GUI](https://www.codeproject.com/Articles/649950/Get-the-Best-of-Both-Worlds-Command-Line-and-GUI) / [Local Copy](Docs/Articles/Get%20the%20Best%20of%20Both%20Worlds_%20Command%20Line%20and%20GUI%20-%20CodeProject.html)
