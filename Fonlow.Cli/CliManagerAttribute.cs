@@ -127,12 +127,12 @@ namespace Fonlow.Cli
 		public bool RequireExplicitAssignmentAssigned { get; private set; }
 
 		/// <summary>
-		/// Option separator in front of each option name.
+		/// Option separator in front of each option name. This is for only reconstructing commandline arguments, but not used in parsing arguments. The assignment symbol is (Slash | Hyphen) as declared in Arguments.g4 of ANTLR.
 		/// </summary>
 		public string OptionSeparator { get; set; }
 
 		/// <summary>
-		/// Assignment symbol to be used between option name and values. The default is : 
+		/// Assignment symbol to be used between option name and values. The default is ":". This is for only reconstructing commandline arguments, but not used in parsing arguments. The assignment symbol is (Colon | Equal | WS+) as declared in Arguments.g4 of ANTLR.
 		/// </summary>
 		public string Assignment { get; set; }
 
