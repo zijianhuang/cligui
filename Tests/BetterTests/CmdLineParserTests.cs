@@ -39,24 +39,52 @@ namespace TestBetter
             Assert.Null(parser.ExecutablePath);
         }
 
-        [Fact]
-        public void TestArgs()
-        {
-            string[] args = new string[] { "/filters", "f1", "Akk kB", "f3", "kke fff" };//.net console app will rip of double quotes, so all args won't be quoted string.
-            Options options = new Options();
-            var parser = new CommandLineParser(options);
-            parser.Parse(args);
-            Assert.False(parser.HasErrors);
-            Assert.Equal("f1", options.Filters[0]);
-            Assert.Equal(4, options.Filters.Length);
-            Assert.Equal("Akk kB", options.Filters[1]);
-            Assert.Null(parser.ExecutablePath);
-        }
+		[Fact]
+		public void TestArgs()
+		{
+			string[] args = new string[] { "/filters", "f1", "Akk kB", "f3", "kke fff" };//.net console app will rip of double quotes, so all args won't be quoted string.
+			Options options = new Options();
+			var parser = new CommandLineParser(options);
+			parser.Parse(args);
+			Assert.False(parser.HasErrors);
+			Assert.Equal("f1", options.Filters[0]);
+			Assert.Equal(4, options.Filters.Length);
+			Assert.Equal("Akk kB", options.Filters[1]);
+			Assert.Null(parser.ExecutablePath);
+		}
+
+		[Fact]
+		public void TestArgsWithSlashMiddle()
+		{
+			string[] args = new string[] { "/filters", "f1", "Akk/kB", "f3", "kke fff" };//.net console app will rip of double quotes, so all args won't be quoted string.
+			Options options = new Options();
+			var parser = new CommandLineParser(options);
+			parser.Parse(args);
+			Assert.False(parser.HasErrors);
+			Assert.Equal("f1", options.Filters[0]);
+			Assert.Equal(4, options.Filters.Length);
+			Assert.Equal("Akk/kB", options.Filters[1]);
+			Assert.Null(parser.ExecutablePath);
+		}
+
+		[Fact]
+		public void TestArgsWithSlashPrefix()
+		{
+			string[] args = new string[] { "/filters", "/f1", "Akk kB", "f3", "kke fff" };//.net console app will rip of double quotes, so all args won't be quoted string.
+			Options options = new Options();
+			var parser = new CommandLineParser(options);
+			parser.Parse(args);
+			Assert.False(parser.HasErrors);
+			Assert.Equal("/f1", options.Filters[0]);
+			Assert.Equal(4, options.Filters.Length);
+			Assert.Equal("Akk kB", options.Filters[1]);
+			Assert.Null(parser.ExecutablePath);
+		}
 
 
 
 
-        [Fact]
+		[Fact]
         public void TestPickyAllPropertiesAssigned()
         {
             var options = new PickyOptions();
