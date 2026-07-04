@@ -9,10 +9,10 @@ parameter: (Slash | Hyphen) parameterName
 
 parameterName: LiteralText | LiteralText Hyphen;
 
-fixedParameter: quotedString | LiteralText | value;
+fixedParameter: QuotedString | LiteralText | value;
 
 value:
-	quotedString
+	QuotedString
 	| LiteralText (
 		(Slash | Hyphen | Equal | Colon)+ LiteralText*
 	)+
@@ -31,7 +31,6 @@ Hyphen: '-';
 
 Backtick: '`';
 
-quotedString: QuotedString;
 QuotedString:
 	('"' AnyString '"')
 	| (Backtick AnyString Backtick); // quote-quote is an escaped quote
@@ -50,7 +49,6 @@ fragment AnyButSeparatorsAndAssign:
 		| ':'
 		| '=' // Assign
 		| '"'
-		// Quote - must never be swallowed by literal text, so QuotedString always wins unambiguously
 		| '`'
 	);
 
