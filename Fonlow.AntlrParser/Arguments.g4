@@ -35,6 +35,7 @@ fragment AnyButAssign:
 		| ':'
 		| '=' // Assign
 		| '"' // Quote - must never be swallowed by literal text
+		| '`'
 	);
 
 fragment AnyButSeparatorsAndAssign:
@@ -46,11 +47,12 @@ fragment AnyButSeparatorsAndAssign:
 		| '=' // Assign
 		| '"'
 		// Quote - must never be swallowed by literal text, so QuotedString always wins unambiguously
+		| '`'
 	);
 
 quotedString: QuotedString;
 QuotedString:
-	'"' AnyString '"'; // quote-quote is an escaped quote
+	('"' AnyString '"') | ('`' AnyString '`'); // quote-quote is an escaped quote
 
 Colon: ':';
 

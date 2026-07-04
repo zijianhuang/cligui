@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Fonlow.Cli;
+using Plossum.CommandLine;
+using System;
 using Xunit;
-using Fonlow.Cli;
 
 namespace TestBetter
 {
@@ -56,32 +57,93 @@ namespace TestBetter
 		[Fact]
 		public void TestArgsWithSlashMiddle()
 		{
-			string[] args = new string[] { "/filters", "f1", "Akk/kB", "f3", "kke fff" };//.net console app will rip of double quotes, so all args won't be quoted string.
-			Options options = new Options();
-			var parser = new CommandLineParser(options);
-			parser.Parse(args);
-			Assert.False(parser.HasErrors);
-			Assert.Equal("f1", options.Filters[0]);
-			Assert.Equal(4, options.Filters.Length);
-			Assert.Equal("Akk/kB", options.Filters[1]);
-			Assert.Null(parser.ExecutablePath);
-		}
-
-		[Fact]
-		public void TestArgsWithSlashPrefix()
-		{
-			string[] args = new string[] { "/filters", "/f1", "Akk kB", "f3", "kke fff" };//.net console app will rip of double quotes, so all args won't be quoted string.
+			string[] args = new string[] { "/filters", "\"/f1\"", "Akk/kB", "f3", "kke fff" };//.net console app will rip of double quotes, so all args won't be quoted string.
 			Options options = new Options();
 			var parser = new CommandLineParser(options);
 			parser.Parse(args);
 			Assert.False(parser.HasErrors);
 			Assert.Equal("/f1", options.Filters[0]);
 			Assert.Equal(4, options.Filters.Length);
-			Assert.Equal("Akk kB", options.Filters[1]);
+			Assert.Equal("Akk/kB", options.Filters[1]);
 			Assert.Null(parser.ExecutablePath);
 		}
 
+		[Fact]
+		public void TestArgsWithSlashMiddleLine()
+		{
+			string[] args = new string[] { "/filters", "\"/f1\"", "Akk/kB", "f3", "kke fff" };//.net console app will rip of double quotes, so all args won't be quoted string.
+			Options options = new Options();
+			var parser = new CommandLineParser(options);
+			parser.Parse("/filters=\"/f1\" \"Akk/kb\" f3 \"kke fff\"", false);
+			Assert.False(parser.HasErrors);
+			Assert.Equal("/f1", options.Filters[0]);
+			Assert.Equal(4, options.Filters.Length);
+			Assert.Equal("Akk/kb", options.Filters[1]);
+			Assert.Null(parser.ExecutablePath);
+		}
 
+		[Fact]
+		public void TestArgsWithSlashPrefix()
+		{
+			string[] args = new string[] { "/filters", "\"//svg:text/svg:tspan\"", "f3", "\"/kke/fff\"" };//.net console app will rip of double quotes, so all args won't be quoted string.
+			Options options = new Options();
+			var parser = new CommandLineParser(options);
+			parser.Parse(args);
+			Assert.False(parser.HasErrors);
+			Assert.Equal(3, options.Filters.Length);
+			Assert.Equal("//svg:text/svg:tspan", options.Filters[0]);
+			Assert.Null(parser.ExecutablePath);
+		}
+
+		[Fact]
+		public void TestArgsWithSlashPrefixLine()
+		{
+			Options options = new Options();
+			var parser = new CommandLineParser(options);
+			parser.Parse("/filters=\"//svg:text/svg:tspan\" f3 \"/kke/fff\"", false);
+			Assert.False(parser.HasErrors);
+			Assert.Equal(3, options.Filters.Length);
+			Assert.Equal("//svg:text/svg:tspan", options.Filters[0]);
+			Assert.Null(parser.ExecutablePath);
+		}
+
+		[Fact]
+		public void TestArgsWithSlashPrefixLineWithExe()
+		{
+			Options options = new Options();
+			var parser = new CommandLineParser(options);
+			parser.Parse("myapp.exe /filters=\"//svg:text/svg:tspan\" f3 \"/kke/fff\"", true);
+			Assert.False(parser.HasErrors);
+			Assert.Equal(3, options.Filters.Length);
+			Assert.Equal("//svg:text/svg:tspan", options.Filters[0]);
+			Assert.NotNull(parser.ExecutablePath);
+		}
+
+		[Fact]
+		public void TestTranslationOptions()
+		{
+			OptionsBase options = new OptionsForXmlWithGoogleTranslate();
+			var parser = new CommandLineParser(options);
+			parser.Parse("/AKF=../../Secrets/GoogleTranslate/apikey.txt /SL=en /TL=\"zh-hant\" /XPaths=\"//svg:text/svg:tspan\" /F=../Tests/TestTranslation/svg/template1.svg /TF=../Tests/TestTranslation/bin/template1.zh-Hant.svg", false);
+			Assert.False(parser.HasErrors);
+			var gOptions = options as OptionsForXmlWithGoogleTranslate;
+			Assert.Equal(1, gOptions.XPaths.Length);
+			Assert.Equal("//svg:text/svg:tspan", gOptions.XPaths[0]);
+			Assert.Null(parser.ExecutablePath);
+		}
+
+		[Fact]
+		public void TestTranslationOptionsBackTick()
+		{
+			OptionsBase options = new OptionsForXmlWithGoogleTranslate();
+			var parser = new CommandLineParser(options);
+			parser.Parse("/AKF=../../Secrets/GoogleTranslate/apikey.txt /SL=en /TL=\"zh-hant\" /XPaths=`//svg:text/svg:tspan` /F=../Tests/TestTranslation/svg/template1.svg /TF=../Tests/TestTranslation/bin/template1.zh-Hant.svg", false);
+			Assert.False(parser.HasErrors);
+			var gOptions = options as OptionsForXmlWithGoogleTranslate;
+			Assert.Equal(1, gOptions.XPaths.Length);
+			Assert.Equal("//svg:text/svg:tspan", gOptions.XPaths[0]);
+			Assert.Null(parser.ExecutablePath);
+		}
 
 
 		[Fact]
@@ -342,4 +404,62 @@ namespace TestBetter
 
 
     }
+
+	[CliManager(Description = "Use Google Translate v2 or v3 to translate XML Text based on XPaths", OptionSeparator = "/", Assignment = ":")]
+	internal sealed class OptionsForXmlWithGoogleTranslate : OptionsWithGoogleTranslate
+	{
+		[CommandLineOption(Aliases = "XPS", Description = "XML text nodes to be translated represented by Xpaths, e.g., /XPS=\"//svg:text/svg:tspan\" \"//ns:pp/ns:span\"")]
+		public string[] XPaths { get; set; } = [];
+
+		[CommandLineOption(Aliases = "XPSF", Description = "Each line declares a XPath for text nodes to be translated, e.g., /XPSF=XPaths.txt")]
+		public string XPathsFile { get; set; }
+
+	}
+
+	public class OptionsWithGoogleTranslate : OptionsBase
+	{
+		[CommandLineOption(Aliases = "AK", Description = "Google Translate API key. e.g., /AK=zasdfSDFSDfsdfdsfs234sdsfki")]
+		public string ApiKey { get; set; }
+
+		[CommandLineOption(Aliases = "AKF", Description = "Google Translate API key stored in a text file. e.g., /AKF=C:/Users/Public/DevApps/GtApiKey.txt")]
+		public string ApiKeyFile { get; set; }
+
+		[CommandLineOption(Aliases = "AV", Description = "Google Translate API version. Default to V2. If V3, a client secret JSON file is expected.")]
+		public string ApiVersion { get; set; } = "V2";
+
+		[CommandLineOption(Aliases = "CSF", Description = "Google Cloud Translate V3 does not support API key but rich ways of authentications. This app uses client secret JSON file you could download from your Google Cloud Service account.")]
+		public string ClientSecretFile { get; set; }
+
+		[CommandLineOption(Aliases = "Reversed", Description = "Translate from target language to source language and save the result to the target file so you can compare. Both SourceFile and TargetFile must be defined.")]
+		public bool ReversedTranslation { get; set; }
+
+	}
+
+	/// <summary>
+	/// Common options
+	/// </summary>
+	public class OptionsBase
+	{
+		[CommandLineOption(Aliases = "F", Description = "Source file path")]
+		public string SourceFile { get; set; }
+
+		[CommandLineOption(Aliases = "TF", Description = "Target file path. Without this, the source file is also the target file.")]
+		public string TargetFile { get; set; }
+
+		[CommandLineOption(Aliases = "SL", Description = "Source language. e.g., /SL=fr")]
+		public string SourceLang { get; set; }
+
+		[CommandLineOption(Aliases = "TL", Description = "Target language. e.g., /TL=zh")]
+		public string TargetLang { get; set; }
+
+		[CommandLineOption(Aliases = "B", Description = "Batch processing of string array to improve overall speed.")]
+		public bool Batch { get; set; }
+
+		[CommandLineOption(Aliases = "h ?", Name = "Help", Description = "Shows this help text")]
+		public bool Help
+		{
+			get;
+			set;
+		}
+	}
 }
