@@ -42,15 +42,6 @@ Equal: '=';
 
 NUMBER: '-'? ('0' | ( '1' ..'9' INT*)) ('.' INT+)? EXPONENT?;
 
-fragment AnyButAssign:
-	~(
-		[ \t\r\n] //WS skip
-		| ':'
-		| '=' // Assign
-		| '"' // Quote - must never be swallowed by literal text
-		| '`'
-	);
-
 fragment AnyButSeparatorsAndAssign:
 	~(
 		'/'
