@@ -139,8 +139,9 @@ namespace TestBetter
 			parser.Parse("/AKF=../../Secrets/GoogleTranslate/apikey.txt /SL=en /TL=\"zh-hant\" /XPaths=`//svg:text/svg:tspan` `/svg:text/svg:abc` /F=../Tests/TestTranslation/svg/template1.svg /TF=../Tests/TestTranslation/bin/template1.zh-Hant.svg", false);
 			Assert.False(parser.HasErrors);
 			var gOptions = options as OptionsForXmlWithGoogleTranslate;
-			Assert.Equal(1, gOptions.XPaths.Length);
+			Assert.Equal(2, gOptions.XPaths.Length);
 			Assert.Equal("//svg:text/svg:tspan", gOptions.XPaths[0]);
+			Assert.Equal("/svg:text/svg:abc", gOptions.XPaths[1]);
 			Assert.Null(parser.ExecutablePath);
 		}
 

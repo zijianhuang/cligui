@@ -52,7 +52,7 @@ fragment AnyButSeparatorsAndAssign:
 		| '`'
 	);
 
-fragment AnyString: ('""' | ~'"')*;
+fragment AnyString: ('""' | ~["`])*;
 
 fragment INT: '0' ..'9'+;
 
