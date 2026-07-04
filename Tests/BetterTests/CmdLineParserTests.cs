@@ -17,7 +17,6 @@ namespace TestBetter
             Assert.False(parser.HasErrors);
             Assert.Equal("DoSomething", options.Function);
             Assert.Equal(1234, options.IntP);
-            //   Assert.Equal(123, options.ByteP);
             Assert.Equal(6, options.Filters.Length);
             Assert.Equal(123, options.ByteP);
             Assert.False(options.Help);
@@ -137,14 +136,13 @@ namespace TestBetter
 		{
 			OptionsBase options = new OptionsForXmlWithGoogleTranslate();
 			var parser = new CommandLineParser(options);
-			parser.Parse("/AKF=../../Secrets/GoogleTranslate/apikey.txt /SL=en /TL=\"zh-hant\" /XPaths=`//svg:text/svg:tspan` /F=../Tests/TestTranslation/svg/template1.svg /TF=../Tests/TestTranslation/bin/template1.zh-Hant.svg", false);
+			parser.Parse("/AKF=../../Secrets/GoogleTranslate/apikey.txt /SL=en /TL=\"zh-hant\" /XPaths=`//svg:text/svg:tspan` `/svg:text/svg:abc` /F=../Tests/TestTranslation/svg/template1.svg /TF=../Tests/TestTranslation/bin/template1.zh-Hant.svg", false);
 			Assert.False(parser.HasErrors);
 			var gOptions = options as OptionsForXmlWithGoogleTranslate;
 			Assert.Equal(1, gOptions.XPaths.Length);
 			Assert.Equal("//svg:text/svg:tspan", gOptions.XPaths[0]);
 			Assert.Null(parser.ExecutablePath);
 		}
-
 
 		[Fact]
         public void TestPickyAllPropertiesAssigned()

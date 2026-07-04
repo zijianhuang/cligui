@@ -102,16 +102,25 @@ namespace TestBetter
             Assert.Equal(MyEnum.Hello | MyEnum.World, options.OkEnum);
         }
 
-        [Fact]
-        public void TestEnumFlagsInQuotedString()
-        {
-            var options = new Options();
-            var s = OptionsReader.ReadOptions("/OkEnum \"hello, World\" ", options);
-            System.Diagnostics.Trace.TraceWarning(s);
-            Assert.Equal(MyEnum.Hello | MyEnum.World, options.OkEnum);
-        }
+		[Fact]
+		public void TestEnumFlagsInQuotedString()
+		{
+			var options = new Options();
+			var s = OptionsReader.ReadOptions("/OkEnum \"hello, World\" ", options);
+			System.Diagnostics.Trace.TraceWarning(s);
+			Assert.Equal(MyEnum.Hello | MyEnum.World, options.OkEnum);
+		}
 
-        [Fact]
+		[Fact]
+		public void TestEnumFlagsInBackTickString()
+		{
+			var options = new Options();
+			var s = OptionsReader.ReadOptions("/OkEnum `hello, World` ", options);
+			System.Diagnostics.Trace.TraceWarning(s);
+			Assert.Equal(MyEnum.Hello | MyEnum.World, options.OkEnum);
+		}
+
+		[Fact]
         public void TestInvalidEnum()
         {
             var options = new Options();

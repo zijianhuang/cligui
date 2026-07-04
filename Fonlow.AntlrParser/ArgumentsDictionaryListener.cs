@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Antlr4.Runtime;
+using Antlr4.Runtime.Tree;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using Antlr4.Runtime;
-using Antlr4.Runtime.Tree;
-using Fonlow.CommandLine.Antlr;
 
 namespace Fonlow.Cli
 {
@@ -116,6 +115,10 @@ namespace Fonlow.Cli
 			{
 				currentValues.Add(v.Trim('"'));
 			}
+			else if (v[0] == '`')
+			{
+				currentValues.Add(v.Trim('`'));
+			}
 			else
 			{
 				currentValues.Add(v);
@@ -131,6 +134,10 @@ namespace Fonlow.Cli
 			if (v[0] == '"')
 			{
 				fixedParameterValues.Add(v.Trim('"'));
+			}
+			else if (v[0] == '`')
+			{
+				fixedParameterValues.Add(v.Trim('`'));
 			}
 			else
 			{

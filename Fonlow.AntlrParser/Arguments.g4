@@ -29,6 +29,19 @@ Slash: '/';
 
 Hyphen: '-';
 
+Backtick: '`';
+
+quotedString: QuotedString;
+QuotedString:
+	('"' AnyString '"')
+	| (Backtick AnyString Backtick); // quote-quote is an escaped quote
+
+Colon: ':';
+
+Equal: '=';
+
+NUMBER: '-'? ('0' | ( '1' ..'9' INT*)) ('.' INT+)? EXPONENT?;
+
 fragment AnyButAssign:
 	~(
 		[ \t\r\n] //WS skip
@@ -49,16 +62,6 @@ fragment AnyButSeparatorsAndAssign:
 		// Quote - must never be swallowed by literal text, so QuotedString always wins unambiguously
 		| '`'
 	);
-
-quotedString: QuotedString;
-QuotedString:
-	('"' AnyString '"') | ('`' AnyString '`'); // quote-quote is an escaped quote
-
-Colon: ':';
-
-Equal: '=';
-
-NUMBER: '-'? ('0' | ( '1' ..'9' INT*)) ('.' INT+)? EXPONENT?;
 
 fragment AnyString: ('""' | ~'"')*;
 
